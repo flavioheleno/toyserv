@@ -1,16 +1,15 @@
 #include <stdio.h>
 
 #include "server.h"
-#include "logger.h"
 
 int main(int argc, const char **argv) {
     const char *addr = "127.0.0.1";
-    int port = 8081;
+    unsigned int port = 8081;
 
     /* ServerObject sObj = new ServerObject(); */
     serverObject *server = serverConstruct(IPv4, addr, strlen(addr), port);
     /* sObj->listen(); */
-    int r = serverListen(server);
+    unsigned int r = serverListen(server);
     if (r != 0) {
         printf("Error on serverListen: %d: %s\n", r, strerror(r));
 

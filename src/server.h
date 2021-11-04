@@ -14,13 +14,13 @@ serverObject *serverConstruct(
     serverType type,
     const char *address,
     size_t addressLen,
-    int port
+    unsigned int port
 );
 
 void serverDestruct(serverObject *instance);
 
-int serverListen(serverObject *instance);
-int serverLoop(serverObject *instance);
+unsigned int serverListen(serverObject *instance);
+unsigned int serverLoop(serverObject *instance);
 void serverStop(serverObject *instance);
 
 #endif /* SERVER_H */

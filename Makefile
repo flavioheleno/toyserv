@@ -1,8 +1,8 @@
 # reference: https://makefiletutorial.com/
 
 CC=gcc
-CFLAGS=-Wall -O2
-
+CFLAGS=-Wall -O2 -D_FORTIFY_SOURCE=2 -pipe -march=native -Werror=format-security -fpie -fstack-protector-all -fcf-protection -fPIC -fno-plt
+LDFLAGS=-Wl,-pie
 # Name of our executable
 TARGET=toyserv
 

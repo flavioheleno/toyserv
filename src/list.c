@@ -4,7 +4,7 @@
 #include "list.h"
 
 typedef struct _listElement {
-    int id;
+    unsigned int id;
     void *ptr;
     struct _listElement *next;
 } listElement;
@@ -12,8 +12,8 @@ typedef struct _listElement {
 struct _listObject {
     listElement *head;
     listElement *curr;
-    int elementCount;
-    int idSequence;
+    unsigned int elementCount;
+    unsigned int idSequence;
 };
 
 listObject *listConstruct() {
@@ -35,7 +35,7 @@ void listDestruct(listObject *instance) {
     }
 }
 
-int listAdd(listObject *instance, void *ptr) {
+unsigned int listAdd(listObject *instance, void *ptr) {
     listElement *element = (listElement *)malloc(sizeof(listElement));
     memset(element, 0, sizeof(listElement));
 
@@ -53,7 +53,7 @@ int listAdd(listObject *instance, void *ptr) {
     return instance->idSequence;
 }
 
-void listDel(listObject *instance, int id) {
+void listDel(listObject *instance, const unsigned int id) {
     listElement *curr = instance->head;
     listElement *prev = NULL;
 
@@ -93,7 +93,7 @@ void listDel(listObject *instance, int id) {
     free(curr);
 }
 
-void *listCurrent(listObject *instance) {
+void *listCurrent(const listObject *instance) {
     return instance->curr->ptr;
 }
 
@@ -105,10 +105,10 @@ void listRewind(listObject *instance) {
     instance->curr = instance->head;
 }
 
-int listValid(listObject *instance) {
+unsigned int listValid(const listObject *instance) {
     return instance->curr != NULL;
 }
 
-int listCount(listObject *instance) {
+unsigned int listCount(const listObject *instance) {
     return instance->elementCount;
 }

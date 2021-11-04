@@ -16,11 +16,11 @@
 #define DEBUG(n, a...) //printf(n, ## a)
 
 typedef struct _clientObject {
-    int id;
+    unsigned int id;
     int socket;
     char *address;
     size_t addressLen;
-    int port;
+    unsigned int port;
     struct sockaddr_in sockaddr;
     char *request;
     size_t reqLen;
@@ -28,14 +28,14 @@ typedef struct _clientObject {
     char *response;
     size_t rspLen;
     size_t rspPos;
-    int keepAlive;
+    unsigned int keepAlive;
 } clientObject;
 
 struct _serverObject {
     serverType type;
     char *address;
     size_t addressLen;
-    int port;
+    unsigned int port;
     int socket;
     struct sockaddr_in sockaddr;
     listObject *list;
@@ -49,7 +49,7 @@ struct _serverObject {
  * @link https://www.tutorialspoint.com/unix_sockets/socket_structures.htm
  * @link https://linux.die.net/man/3/inet_aton
  */
-serverObject *serverConstruct(serverType type, const char *address, size_t addressLen, int port) {
+serverObject *serverConstruct(serverType type, const char *address, size_t addressLen,  unsigned int port) {
     DEBUG("serverConstruct()\n");
     serverObject *instance = (serverObject *)malloc(sizeof(serverObject));
     memset(instance, 0, sizeof(serverObject));
@@ -110,7 +110,7 @@ void serverDestruct(serverObject *instance) {
  * @link https://www.man7.org/linux/man-pages/man2/bind.2.html
  * @link https://www.man7.org/linux/man-pages/man2/listen.2.html
  */
-int serverListen(serverObject *instance) {
+unsigned int serverListen(serverObject *instance) {
     DEBUG("serverListen()\n");
     if (inet_aton(instance->address, &instance->sockaddr.sin_addr) == 0) {
         DEBUG("Error at inet_aton\n");
@@ -180,9 +180,9 @@ int serverListen(serverObject *instance) {
  * @link https://www.man7.org/linux/man-pages/man2/read.2.html
  * @link https://www.man7.org/linux/man-pages/man2/write.2.html
  */
-int serverLoop(serverObject *instance) {
+unsigned int serverLoop(serverObject *instance) {
     DEBUG("serverLoop()\n");
-    int nfds;
+    unsigned int nfds;
     fd_set rfds, wfds;
     clientObject *client;
     struct timeval timeout = {0};
@@ -353,7 +353,7 @@ void serverStop(serverObject *instance) {
             listNext(instance->list);
         }
     }
-    
+
     if (instance->socket > 0) {
         close(instance->socket);
         instance->socket = 0;

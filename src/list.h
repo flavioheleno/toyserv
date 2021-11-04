@@ -16,17 +16,17 @@ void listDestruct(listObject *instance);
 /**
  * Adds a new element to the beginning of the list
  */
-int listAdd(listObject *instance, void *ptr);
+unsigned int listAdd(listObject *instance, void *ptr);
 
 /**
  * Removes an element from the list
  */
-void listDel(listObject *instance, int id);
+void listDel(listObject *instance, const unsigned int id);
 
 /**
  * Return the current element
  */
-void *listCurrent(listObject *instance);
+void *listCurrent(const listObject *instance);
 
 /**
  * Move forward to next element
@@ -41,11 +41,11 @@ void listRewind(listObject *instance);
 /**
  * Checks if current position is valid
  */
-int listValid(listObject *instance);
+unsigned int listValid(const listObject *instance);
 
 /**
  * Return the number of elements in the list
  */
-int listCount(listObject *instance);
+unsigned int listCount(const listObject *instance);
 
 #endif /* LIST_H */
