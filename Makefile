@@ -36,7 +36,7 @@ run: clean $(BUILD_DIR)/$(TARGET)
 
 .PHONY: clean
 clean:
-	rm -r $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 
 # include the .d makefiles
 -include $(DEPS)

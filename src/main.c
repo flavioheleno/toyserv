@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "server.h"
+#include "logger.h"
 
 int main(int argc, const char **argv) {
     const char *addr = "127.0.0.1";
@@ -11,14 +12,14 @@ int main(int argc, const char **argv) {
     /* sObj->listen(); */
     unsigned int r = serverListen(server);
     if (r != 0) {
-        printf("Error on serverListen: %d: %s\n", r, strerror(r));
+        LOG_ERROR("Error on serverListen: %d: %s\n", r, strerror(r));
 
         return 1;
     }
 
     r = serverLoop(server);
     if (r != 0) {
-        printf("Error on serverLoop: %d: %s\n", r, strerror(r));
+        LOG_ERROR("Error on serverLoop: %d: %s\n", r, strerror(r));
 
         return 1;
     }
